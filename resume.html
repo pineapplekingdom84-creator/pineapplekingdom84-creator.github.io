@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Resume</title>
+  <link rel="icon" href="images/icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-light">
+
+<table width="100%" cellpadding="10">
+  <tr>
+    <td width="80%" align="center"><h2>welcome to my website</h2></td>
+    <td width="20%" align="right">
+      <img src="images/icon.png" id="iconImg" alt="Icon" width="100" height="100">
+      <p id="iconCaption" style="display:none; color:black;">my icon</p>
+    </td>
+  </tr>
+</table>
+
+<table width="100%" cellpadding="10" class="navbar">
+  <tr>
+    <td align="center">
+      <a href="index.html" id="homeLink">Home</a> |
+      <a href="projects.html" id="projectsLink">Projects</a> |
+      <a href="resume.html" id="resumeLink">Resume</a>
+    </td>
+  </tr>
+</table>
+
+<table width="100%" cellpadding="10">
+  <tr>
+    <td align="center">
+      <p><strong>Choose a colour scheme:</strong></p>
+      <button class="theme-btn active-theme" id="btn-light"
+              onclick="setTheme('theme-light', 'btn-light')">
+        ☀️ Light
+      </button>
+      <button class="theme-btn" id="btn-dark"
+              onclick="setTheme('theme-dark', 'btn-dark')">
+        🌙 Dark
+      </button>
+      <button class="theme-btn" id="btn-warm"
+              onclick="setTheme('theme-warm', 'btn-warm')">
+        🍂 Warm
+      </button>
+    </td>
+  </tr>
+</table>
+
+<table width="100%" cellpadding="10">
+  <tr valign="top">
+    <td width="35%">
+      <h3>Education</h3>
+      <p>School Name</p>
+      <p>Program</p>
+      <p>Year</p>
+      <h3>Experience</h3>
+      <p>Role</p>
+      <p>Company</p>
+      <p>What I did</p>
+    </td>
+    <td width="40%" align="center">
+      <video width="540" height="315" controls>
+        <source src="videos/demo.mp4" type="video/mp4">
+      </video>
+    </td>
+    <td width="25%" align="center">
+      <h3>My favourite song</h3>
+      <audio controls>
+        <source src="audio/intro.mp3" type="audio/mpeg">
+      </audio>
+      <p>
+        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+      </p>
+    </td>
+  </tr>
+</table>
+
+<table width="100%" cellpadding="10" class="footer">
+  <tr>
+    <td align="center"><h2>Footer</h2></td>
+  </tr>
+</table>
+
+<script>
+
+  function setTheme(themeName, btnId) {
+    document.body.classList.remove("theme-light", "theme-dark", "theme-warm");
+    document.body.classList.add(themeName);
+
+    var buttons = document.querySelectorAll(".theme-btn");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove("active-theme");
+    }
+    document.getElementById(btnId).classList.add("active-theme");
+
+    localStorage.setItem("preferredTheme", themeName);
+    localStorage.setItem("preferredBtn", btnId);
+  }
+
+  window.onload = function () {
+
+    var savedTheme = localStorage.getItem("preferredTheme");
+    var savedBtn   = localStorage.getItem("preferredBtn");
+    if (savedTheme && savedBtn) {
+      setTheme(savedTheme, savedBtn);
+    }
+
+    var page = window.location.pathname.split("/").pop();
+    if (page === "index.html" || page === "") {
+      document.getElementById("homeLink").style.color = "red";
+      document.getElementById("homeLink").style.fontWeight = "bold";
+    } else if (page === "projects.html") {
+      document.getElementById("projectsLink").style.color = "red";
+      document.getElementById("projectsLink").style.fontWeight = "bold";
+    } else if (page === "resume.html") {
+      document.getElementById("resumeLink").style.color = "red";
+      document.getElementById("resumeLink").style.fontWeight = "bold";
+    }
+
+    var icon = document.getElementById("iconImg");
+    var iconCaption = document.getElementById("iconCaption");
+
+    icon.addEventListener("mouseover", function () {
+      iconCaption.style.display = "block";
+    });
+
+    icon.addEventListener("mouseout", function () {
+      iconCaption.style.display = "none";
+    });
+
+  };
+</script>
+
+</body>
+</html>
